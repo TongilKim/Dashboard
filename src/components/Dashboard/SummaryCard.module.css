@@ -3,13 +3,9 @@
   flex-direction: column;
   align-items: flex-start;
   background-color: white;
-  /* min-width: 45%; */
   height: 100%;
   box-shadow: 0 4px 8px rgba(0.1, 0.1, 0.1, 0.1);
   padding-left: 30px;
-  /*
-  padding-top: 12px;
-  padding-bottom: 35px; */
 }
 
 .wrapper > div {

@@ -1,7 +1,5 @@
-import React, { Fragment } from "react";
 import SummaryCard from "../../components/Dashboard/SummaryCard";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import style from "./index.module.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -41,7 +39,7 @@ const index = () => {
       className="layout"
       isResizable
       isDraggable
-      layouts={{ lg: layout, md: layout }} // Default layout for large screens (lg)
+      layouts={{ lg: layout }}
       breakpoints={{ lg: 1280, md: 992, sm: 767, xs: 480, xxs: 0 }}
       cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
       onLayoutChange={onLayoutChange}

@@ -1,4 +1,3 @@
-import React, { LegacyRef } from "react";
 import style from "./SummaryCard.module.css";
 import { TbArrowBigDownFilled, TbArrowBigUpFilled } from "react-icons/tb";
 
