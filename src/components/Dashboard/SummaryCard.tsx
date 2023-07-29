@@ -1,8 +1,9 @@
-import React from "react";
+import React, { LegacyRef } from "react";
 import style from "./SummaryCard.module.css";
 import { TbArrowBigDownFilled, TbArrowBigUpFilled } from "react-icons/tb";
 
 type Props = {
+  // key: number;
   title: string;
   sumTitle: string;
   totalNumber: number;
@@ -10,6 +11,7 @@ type Props = {
 };
 const SummaryCard = (props: Props) => {
   const { title, sumTitle, totalNumber, increaseNumber } = props;
+
   const isDownTrend = increaseNumber.includes("-");
 
   return (
@@ -29,5 +31,4 @@ const SummaryCard = (props: Props) => {
     </div>
   );
 };
-
 export default SummaryCard;
