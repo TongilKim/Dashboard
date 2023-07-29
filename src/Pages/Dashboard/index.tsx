@@ -1,8 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect } from "react";
 import DauChart from "../../components/Dashboard/DauChart";
 import SummaryCard from "../../components/Dashboard/SummaryCard";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import TopReferralInPieChart from "../../components/Dashboard/TopReferralInPieChart";
 import style from "./index.module.css";
+import { getUserEventInfoApi } from "../../apis";
+import { useAppDispatch, useAppSelector } from "../../stores/hooks";
+import { setUserEventInfo } from "../../stores/slice/UserEventInfoSlice";
+import { setSnackBarMsg } from "../../stores/slice/SnackbarSlice";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -53,11 +59,31 @@ const layout = [
   },
 ];
 
-const index = () => {
+const Index = () => {
+  // STORE STATE
+  const dispatch = useAppDispatch();
+  const { totalEventCount, uniqueEventCount } = useAppSelector(
+    (state) => state.userEventInfo
+  );
+
   const onLayoutChange = (newLayout: any) => {
     // Callback function when the layout changes
     console.log("New Layout:", newLayout);
   };
+
+  const fetchData = async () => {
+    const userEventResult = await getUserEventInfoApi();
+    if (userEventResult) {
+      dispatch(setUserEventInfo(userEventResult));
+    } else {
+      // api error occur
+      dispatch(setSnackBarMsg("API 요청으로 부터 문제가 발생 했습니다."));
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <ResponsiveGridLayout
@@ -76,7 +102,7 @@ const index = () => {
         <SummaryCard
           title="접속유저"
           sumTitle="Unique Event Count"
-          totalNumber={18204}
+          totalNumber={uniqueEventCount}
           increaseNumber="-931"
         />
       </div>
@@ -84,7 +110,7 @@ const index = () => {
         <SummaryCard
           title="접속횟수"
           sumTitle="Total Event Count"
-          totalNumber={796543}
+          totalNumber={totalEventCount}
           increaseNumber="1234"
         />
       </div>
@@ -98,4 +124,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

@@ -1,4 +1,4 @@
-type EventCountData = {
+export type EventCountData = {
   data: Data;
   result: boolean;
   message: string;
@@ -18,7 +18,7 @@ type Header = {
   value_type: string;
 };
 
-export const getEventCountApi = async () => {
+export const getUserEventInfoApi = async () => {
   let data: EventCountData | null = null;
 
   try {

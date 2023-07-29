@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useAppSelector } from "../../stores/hooks";
 import style from "./DauChart.module.css";
 import {
   ComposedChart,
@@ -11,68 +13,46 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  {
-    name: "Page A",
-    uv: 590,
-    pv: 800,
-    amt: 1400,
-  },
-  {
-    name: "Page B",
-    uv: 868,
-    pv: 967,
-    amt: 1506,
-  },
-  {
-    name: "Page C",
-    uv: 1397,
-    pv: 1098,
-    amt: 989,
-  },
-  {
-    name: "Page D",
-    uv: 1480,
-    pv: 1200,
-    amt: 1228,
-  },
-  {
-    name: "Page E",
-    uv: 1520,
-    pv: 1108,
-    amt: 1100,
-  },
-  {
-    name: "Page F",
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
-  },
-];
+const renderCustomLegend = (value: string, entry: any) => {
+  const { color } = entry;
+
+  return (
+    <span style={{ color }}>
+      {value === "pageView" ? "Total Event Count" : "Unique Event Count"}
+    </span>
+  );
+};
 
 const DauChart = () => {
+  const { dauChartData } = useAppSelector((state) => state.userEventInfo);
+  console.log("dauChartData: ", dauChartData);
   return (
     <div className={style.wrapper}>
       <div className={style.title}>DAU</div>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
           width={500}
-          height={400}
-          data={data}
+          height={500}
+          data={dauChartData}
           margin={{
-            top: 20,
+            top: 100,
             right: 20,
             bottom: 60,
             left: 20,
           }}
         >
           <CartesianGrid stroke="#f5f5f5" />
-          <XAxis dataKey="name" scale="band" />
-          <YAxis />
+          <XAxis dataKey="date" scale="band" />
+          <YAxis dataKey="pageView" />
           <Tooltip />
-          <Legend />
-          <Bar dataKey="uv" barSize={20} fill="#21c3aa" />
-          <Line type="monotone" dataKey="uv" stroke="#58a89d" strokeWidth={2} />
+          <Legend iconSize={20} formatter={renderCustomLegend} />
+          <Line
+            type="monotone"
+            dataKey="uniqView"
+            stroke="#58a89d"
+            strokeWidth={2}
+          />
+          <Bar dataKey="pageView" fill="#21c3aa" />
         </ComposedChart>
       </ResponsiveContainer>
     </div>

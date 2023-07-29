@@ -6,14 +6,14 @@ import Snackbar from "./common/Snackbar";
 
 function App() {
   //STORE STATE
-  const { openSnackBar } = useAppSelector((state) => state.snackBar);
+  const { snackbarMsg } = useAppSelector((state) => state.snackBar);
 
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Dashboard />}></Route>
       </Routes>
-      {openSnackBar ? <Snackbar /> : null}
+      {snackbarMsg ? <Snackbar /> : null}
     </div>
   );
 }
