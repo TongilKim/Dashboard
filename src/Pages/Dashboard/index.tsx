@@ -1,34 +1,46 @@
+import DauChart from "../../components/Dashboard/DauChart";
 import SummaryCard from "../../components/Dashboard/SummaryCard";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const index = () => {
-  const layout = [
-    {
-      i: "userCount",
-      x: 0,
-      y: 0,
-      w: 5,
-      h: 1.3,
-      minH: 1.3,
-      minW: 2,
-      maxH: 2,
-      maxW: 9,
-    },
-    {
-      i: "enteredCount",
-      x: 7,
-      y: 0,
-      w: 5,
-      h: 1.3,
-      minH: 1.3,
-      minW: 2,
-      maxH: 2,
-      maxW: 9,
-    },
-  ];
+const layout = [
+  {
+    i: "userCount",
+    x: 0,
+    y: 0,
+    w: 5,
+    h: 1.3,
+    minH: 1.3,
+    minW: 2,
+    maxH: 2,
+    maxW: 10,
+  },
+  {
+    i: "enteredCount",
+    x: 5,
+    y: 1,
+    w: 5,
+    h: 1.3,
+    minH: 1.3,
+    minW: 2,
+    maxH: 2,
+    maxW: 10,
+  },
+  {
+    i: "DAU",
+    x: 0,
+    y: 1.3,
+    w: 10,
+    h: 2,
+    minH: 2,
+    minW: 5,
+    maxH: 4,
+    maxW: 10,
+  },
+];
 
+const index = () => {
   const onLayoutChange = (newLayout: any) => {
     // Callback function when the layout changes
     console.log("New Layout:", newLayout);
@@ -60,6 +72,9 @@ const index = () => {
           totalNumber={796543}
           increaseNumber="1234"
         />
+      </div>
+      <div key="DAU">
+        <DauChart />
       </div>
     </ResponsiveGridLayout>
   );
