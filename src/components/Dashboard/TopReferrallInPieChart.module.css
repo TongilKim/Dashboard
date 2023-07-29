@@ -1,0 +1,13 @@
+.wrapper {
+  background-color: white;
+  height: 100%;
+  padding-left: 30px;
+}
+
+.title {
+  color: #3291e8;
+  font-weight: 700;
+  text-align: left;
+  position: absolute;
+  transform: translate(2px, 10px);
+}
