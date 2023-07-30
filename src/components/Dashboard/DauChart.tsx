@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { formatNumber } from "../../Utils/Format";
+import { formatNumber } from "../../utils/Format";
 import { useAppSelector } from "../../stores/hooks";
 import style from "./DauChart.module.css";
 import {

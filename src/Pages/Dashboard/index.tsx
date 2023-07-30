@@ -12,6 +12,7 @@ import {
   setUserEventInfo,
 } from "../../stores/slice/UserEventInfoSlice";
 import { setSnackBarMsg } from "../../stores/slice/SnackbarSlice";
+import TopReferralInTable from "../../components/Dashboard/TopReferralInTable";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -52,6 +53,17 @@ const layout = [
   {
     i: "topReferralInPieChart",
     x: 0,
+    y: 2,
+    w: 5,
+    h: 2.6,
+    minH: 2,
+    minW: 4,
+    maxH: 4,
+    maxW: 10,
+  },
+  {
+    i: "topReferralInTable",
+    x: 5,
     y: 2,
     w: 5,
     h: 2.6,
@@ -125,6 +137,10 @@ const Index = () => {
       </div>
       <div key="topReferralInPieChart">
         <TopReferralInPieChart />
+      </div>
+
+      <div key="topReferralInTable">
+        <TopReferralInTable />
       </div>
     </ResponsiveGridLayout>
   );
