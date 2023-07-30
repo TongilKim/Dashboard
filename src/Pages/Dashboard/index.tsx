@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from "react";
 import DauChart from "../../components/Dashboard/DauChart";
@@ -21,7 +22,7 @@ import TopReferralInTable from "../../components/Dashboard/TopReferralInTable";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const layout = [
+const defaultLayout = [
   {
     i: "userCount",
     x: 0,
@@ -78,6 +79,8 @@ const layout = [
     maxW: 10,
   },
 ];
+const storedLayout = sessionStorage.getItem("layoutInfo");
+const layout = storedLayout ? JSON.parse(storedLayout) : defaultLayout;
 
 const Index = () => {
   // STORE STATE
@@ -87,8 +90,7 @@ const Index = () => {
   );
 
   const onLayoutChange = (newLayout: any) => {
-    // Callback function when the layout changes
-    console.log("New Layout:", newLayout);
+    sessionStorage.setItem("layoutInfo", JSON.stringify(newLayout));
   };
 
   const fetchData = async () => {
@@ -113,7 +115,7 @@ const Index = () => {
   return (
     <ResponsiveGridLayout
       className={`layout ${style.wrapper}`}
-      layouts={{ lg: layout }}
+      layouts={{ lg: layout }} // TODO: md, sm, xs, xxs
       // resizeHandle={
       //   <span className="react-resizable-handle" style={{}}>
       //     hi
