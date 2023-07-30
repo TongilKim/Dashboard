@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { formatNumber } from "../../Utils/Format";
 import { useAppSelector } from "../../stores/hooks";
 import style from "./DauChart.module.css";
 import {
@@ -11,6 +12,8 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  BarChart,
+  LineChart,
 } from "recharts";
 
 const renderCustomLegend = (value: string, entry: any) => {
@@ -25,7 +28,7 @@ const renderCustomLegend = (value: string, entry: any) => {
 
 const DauChart = () => {
   const { dauChartData } = useAppSelector((state) => state.userEventInfo);
-  console.log("dauChartData: ", dauChartData);
+
   return (
     <div className={style.wrapper}>
       <div className={style.title}>DAU</div>
@@ -43,15 +46,21 @@ const DauChart = () => {
         >
           <CartesianGrid stroke="#f5f5f5" />
           <XAxis dataKey="date" scale="band" />
-          <YAxis dataKey="pageView" />
+          <YAxis
+            dataKey="pageView"
+            tickFormatter={(value) => formatNumber(value)}
+          />
+
           <Tooltip />
           <Legend iconSize={20} formatter={renderCustomLegend} />
           <Line
             type="monotone"
             dataKey="uniqView"
             stroke="#58a89d"
+            yAxisId="uniqView"
             strokeWidth={2}
           />
+          <YAxis yAxisId="uniqView" dataKey="uniqView" orientation="right" />
           <Bar dataKey="pageView" fill="#21c3aa" />
         </ComposedChart>
       </ResponsiveContainer>
