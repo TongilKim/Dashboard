@@ -12,8 +12,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  BarChart,
-  LineChart,
+  Brush,
 } from "recharts";
 
 const renderCustomLegend = (value: string, entry: any) => {
@@ -62,6 +61,7 @@ const DauChart = () => {
           />
           <YAxis yAxisId="uniqView" dataKey="uniqView" orientation="right" />
           <Bar dataKey="pageView" fill="#21c3aa" />
+          <Brush dataKey="pageView" y={10} stroke="#0288d1" />
         </ComposedChart>
       </ResponsiveContainer>
     </div>

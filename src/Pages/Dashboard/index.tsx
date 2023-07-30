@@ -114,7 +114,7 @@ const Index = () => {
 
   return (
     <ResponsiveGridLayout
-      className={`layout ${style.wrapper}`}
+      className={`layout`}
       layouts={{ lg: layout }} // TODO: md, sm, xs, xxs
       // resizeHandle={
       //   <span className="react-resizable-handle" style={{}}>
