@@ -1,20 +1,20 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import "./TableHeader.module.css";
 
 type Props = {
-  headerList: Array<string>;
+  header: string;
+  sortIcon?: ReactNode;
 };
 const TableHeader = (props: Props) => {
-  const { headerList } = props;
+  const { header, sortIcon } = props;
 
   return (
-    <thead>
-      <tr>
-        {headerList.map((header, idx) => (
-          <th key={idx}>{header}</th>
-        ))}
-      </tr>
-    </thead>
+    <th>
+      <div>
+        <span>{header}</span>
+        <span>{sortIcon}</span>
+      </div>
+    </th>
   );
 };
 

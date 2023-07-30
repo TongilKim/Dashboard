@@ -5,3 +5,16 @@ th {
   border: 1px solid #e7e8ea;
   border-left: none;
 }
+
+th > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+th > div > span:nth-child(2) {
+  cursor: pointer;
+}
+
+th > div > span:nth-child(2):hover {
+  color: #3291e8;
+}

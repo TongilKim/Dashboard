@@ -108,24 +108,86 @@ const reFormatTableData = (data: string[][]) => {
   data.forEach(([country, region, city, value]) => {
     if (!groupedData[country]) {
       groupedData[country] = {};
+      groupedData[country].total = 0;
     }
     if (!groupedData[country][region]) {
       groupedData[country][region] = [];
     }
     groupedData[country][region].push({ city, value });
+    groupedData[country].total += parseInt(value, 10);
   });
 
   // Step 2: Reformat the data for expandable table
   const formattedData: any = [];
   Object.keys(groupedData).forEach((country) => {
-    const countryData = { country, regions: [] };
+    const countryData: any = {
+      country,
+      total: groupedData[country].total,
+      regions: [],
+    };
     Object.keys(groupedData[country]).forEach((region) => {
-      const regionData = { region, cities: groupedData[country][region] };
-      countryData.regions.push(regionData);
+      if (region !== "total") {
+        const regionData = {
+          region,
+          total: 0,
+          cities: groupedData[country][region],
+        };
+        regionData.total = groupedData[country][region].reduce(
+          (acc: any, cityData: any) => acc + parseInt(cityData.value, 10),
+          0
+        );
+        countryData.regions.push(regionData);
+      }
     });
     formattedData.push(countryData);
   });
   return formattedData;
+};
+
+const sortTableDataByMetrics = (
+  orderMultiplier: number,
+  currentData: Array<any>
+) => {
+  currentData.sort((a, b) => orderMultiplier * (b.total - a.total));
+
+  currentData.forEach((countryData) => {
+    countryData.regions.sort(
+      (a: any, b: any) => orderMultiplier * (b.total - a.total)
+    );
+
+    // Sort the cities for each region by the value based on sortOrder
+    countryData.regions.forEach((regionData: any) => {
+      regionData.cities.sort(
+        (a: any, b: any) => orderMultiplier * (b.value - a.value)
+      );
+    });
+  });
+
+  return currentData;
+};
+
+const sortTableDataByGroups = (
+  orderMultiplier: number,
+  currentData: Array<any>
+) => {
+  currentData.sort(
+    (a, b) => orderMultiplier * a.country.localeCompare(b.country)
+  );
+
+  currentData.forEach((countryData) => {
+    countryData.regions.sort(
+      (a: any, b: any) => orderMultiplier * a.region.localeCompare(b.region)
+    );
+
+    // Sort the cities for each region by the value based on sortOrder
+    countryData.regions.forEach((regionData: any) => {
+      regionData.cities.sort(
+        (a: any, b: any) => orderMultiplier * a.city.localeCompare(b.city)
+      );
+    });
+  });
+
+  return currentData;
 };
 
 type InitialState = {
@@ -172,6 +234,24 @@ const userEventInfoSlice = createSlice({
       const { data } = result;
       state.referralTableData = reFormatTableData(data.rows);
     },
+    sortReferralTableDataByGroups(state, action: PayloadAction<string>) {
+      const option = action.payload;
+      const orderMultiplier = option === "asc" ? 1 : -1;
+      const currentData = sortTableDataByGroups(orderMultiplier, [
+        ...state.referralTableData,
+      ]);
+
+      state.referralTableData = currentData;
+    },
+    sortReferralTableDataByMetrics(state, action: PayloadAction<string>) {
+      const option = action.payload;
+      const orderMultiplier = option === "asc" ? 1 : -1;
+      const currentData = sortTableDataByMetrics(orderMultiplier, [
+        ...state.referralTableData,
+      ]);
+
+      state.referralTableData = currentData;
+    },
   },
 });
 
@@ -179,6 +259,8 @@ export const {
   setUserEventInfo,
   setTopReferralDataForPieChart,
   setTopReferralTableData,
+  sortReferralTableDataByGroups,
+  sortReferralTableDataByMetrics,
 } = userEventInfoSlice.actions;
 
 export default userEventInfoSlice.reducer;
