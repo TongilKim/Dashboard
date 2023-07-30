@@ -1,3 +1,4 @@
+import { useAppSelector } from "../../stores/hooks";
 import style from "./TopReferrallInPieChart.module.css";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 
@@ -12,13 +13,17 @@ const data = [
 const COLORS = ["#4ea397", "#21c3aa", "#7bd9a5", "#f58db2", "#d0648a"];
 
 const TopReferralInPieChart = () => {
+  const { topFiveReferralData } = useAppSelector(
+    (state) => state.userEventInfo
+  );
+
   return (
     <div className={style.wrapper}>
       <div className={style.title}>Top Referral</div>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart width={500} height={500}>
           <Pie
-            data={data}
+            data={topFiveReferralData}
             cx="50%"
             cy="50%"
             labelLine={true}
@@ -28,7 +33,7 @@ const TopReferralInPieChart = () => {
             label={true}
             legendType="rect"
           >
-            {data.map((entry, index) => (
+            {topFiveReferralData.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}

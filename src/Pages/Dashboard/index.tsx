@@ -5,9 +5,12 @@ import SummaryCard from "../../components/Dashboard/SummaryCard";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import TopReferralInPieChart from "../../components/Dashboard/TopReferralInPieChart";
 import style from "./index.module.css";
-import { getUserEventInfoApi } from "../../apis";
+import { getTopReferralForPieChartApi, getUserEventInfoApi } from "../../apis";
 import { useAppDispatch, useAppSelector } from "../../stores/hooks";
-import { setUserEventInfo } from "../../stores/slice/UserEventInfoSlice";
+import {
+  setTopReferralDataForPieChart,
+  setUserEventInfo,
+} from "../../stores/slice/UserEventInfoSlice";
 import { setSnackBarMsg } from "../../stores/slice/SnackbarSlice";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -73,8 +76,11 @@ const Index = () => {
 
   const fetchData = async () => {
     const userEventResult = await getUserEventInfoApi();
-    if (userEventResult) {
+    const pieChartTopReferralData = await getTopReferralForPieChartApi();
+
+    if (userEventResult && pieChartTopReferralData) {
       dispatch(setUserEventInfo(userEventResult));
+      dispatch(setTopReferralDataForPieChart(pieChartTopReferralData));
     } else {
       // api error occur
       dispatch(setSnackBarMsg("API 요청으로 부터 문제가 발생 했습니다."));
