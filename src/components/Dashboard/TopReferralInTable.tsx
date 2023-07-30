@@ -16,7 +16,6 @@ const TopReferralInTable = () => {
   const [sortGroups, setSortGroups] = useState(false);
   const [sortMetrics, setSortMetrics] = useState(false);
 
-  console.log(referralTableData);
   const onClickSortGroups = () => {
     dispatch(sortReferralTableDataByGroups(sortGroups ? "asc" : "desc"));
     setSortGroups(!sortGroups);
@@ -69,7 +68,7 @@ const TopReferralInTable = () => {
             </tr>
           </thead>
 
-          <TableBody data={referralTableData} />
+          <TableBody />
         </table>
       </div>
     </div>

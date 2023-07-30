@@ -102,6 +102,15 @@ const getTopFiveData = (data: string[][]) => {
   return resultArray;
 };
 
+/**
+ *  -Country1
+ *    -Total
+ *    -Region1
+ *      -City 1
+ *      -City 2
+ *    -Region2
+ *  와 같은 형태로 데이터 재가공
+ */
 const reFormatTableData = (data: string[][]) => {
   // Step 1: Group the data by country and region
   const groupedData: any = {};

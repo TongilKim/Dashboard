@@ -1,17 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
 import TableRow from "./TableRow";
+import { useAppSelector } from "../../stores/hooks";
 
-type Props = {
-  data: any[];
-};
-
-const TableBody = (props: Props) => {
-  const { data } = props;
+const TableBody = () => {
+  const { referralTableData } = useAppSelector((state) => state.userEventInfo);
 
   return (
     <tbody>
-      {data.map((row, idx) => (
+      {referralTableData.map((row, idx) => (
         <TableRow key={idx} rowInfo={row} />
       ))}
     </tbody>

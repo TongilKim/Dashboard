@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import style from "./TableRow.module.css";
 import { PiCaretCircleRight } from "react-icons/pi";
 import { MdExpandCircleDown } from "react-icons/md";
+import { useAppSelector } from "../../stores/hooks";
 
 const CityRow = (props: {
   cityInfo: {
@@ -65,6 +66,7 @@ const RegionRow = (props: {
 
 const TableRow = (props: { rowInfo: any }) => {
   const { rowInfo } = props;
+  const { referralTableData } = useAppSelector((state) => state.userEventInfo);
   const [isClickedCountry, setIsClickedCountry] = useState(false);
   const isOpenRegions = isClickedCountry && rowInfo.regions.length > 0;
 
@@ -85,6 +87,9 @@ const TableRow = (props: { rowInfo: any }) => {
     return result;
   };
 
+  useEffect(() => {
+    setIsClickedCountry(false);
+  }, [referralTableData]);
   return (
     <Fragment>
       <tr>
