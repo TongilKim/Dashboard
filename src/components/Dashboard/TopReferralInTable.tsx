@@ -1,47 +1,24 @@
-import React from "react";
 import style from "./topReferralInTable.module.css";
-import { MdExpandCircleDown } from "react-icons/md";
-import { PiCaretCircleRight } from "react-icons/pi";
-import useOpenController from "../../hooks/useOpenController";
+import TableHeader from "../../common/Table/TableHeader";
+import TableBody from "../../common/Table/TableBody";
+import { useAppSelector } from "../../stores/hooks";
 
 const TopReferralInTable = () => {
-  const { isOpen, toggle } = useOpenController(false);
-
+  const { referralTableData } = useAppSelector((state) => state.userEventInfo);
+  console.log(referralTableData);
   return (
     <div className={style.wrapper}>
       <div className={style.title}>Top Referral</div>
       <div className={style.tableContainer}>
         <table>
-          <thead>
-            <th style={{ fontWeight: "bold" }}>GroupBy</th>
-            <th style={{ fontWeight: "bold" }}>Metrics</th>
-          </thead>
-          <thead>
-            <th>{`Country(IP) > Region(IP) > City(IP)`}</th>
-            <th>{`Sum (Unique Event Count)`}</th>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td onClick={toggle}>
-                <span>
-                  {isOpen ? <PiCaretCircleRight /> : <MdExpandCircleDown />}
-                  {`jp(11)`}
-                </span>
-              </td>
-              <td>{`13,031`}</td>
-            </tr>
-
-            <tr>
-              <td onClick={toggle}>
-                <span>
-                  {isOpen ? <PiCaretCircleRight /> : <MdExpandCircleDown />}
-                  {`us(23)`}
-                </span>
-              </td>
-              <td>{`131`}</td>
-            </tr>
-          </tbody>
+          <TableHeader headerList={["GroupBy", "Metrics"]} />
+          <TableHeader
+            headerList={[
+              `Country(IP) > Region(IP) > City(IP)`,
+              `Sum (Unique Event Count)`,
+            ]}
+          />
+          <TableBody data={referralTableData} />
         </table>
       </div>
     </div>

@@ -43,7 +43,7 @@ const TopReferralInPieChart = () => {
   const { topFiveReferralData } = useAppSelector(
     (state) => state.userEventInfo
   );
-  console.log(topFiveReferralData);
+
   return (
     <div className={style.wrapper}>
       <div className={style.title}>Top Referral</div>

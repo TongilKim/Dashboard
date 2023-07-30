@@ -5,11 +5,16 @@ import SummaryCard from "../../components/Dashboard/SummaryCard";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import TopReferralInPieChart from "../../components/Dashboard/TopReferralInPieChart";
 import style from "./index.module.css";
-import { getTopReferralForPieChartApi, getUserEventInfoApi } from "../../apis";
+import {
+  getTopReferralForPieChartApi,
+  getTopReferralForTableApi,
+  getUserEventInfoApi,
+} from "../../apis";
 import { useAppDispatch, useAppSelector } from "../../stores/hooks";
 import {
   setTopReferralDataForPieChart,
   setUserEventInfo,
+  setTopReferralTableData,
 } from "../../stores/slice/UserEventInfoSlice";
 import { setSnackBarMsg } from "../../stores/slice/SnackbarSlice";
 import TopReferralInTable from "../../components/Dashboard/TopReferralInTable";
@@ -89,10 +94,12 @@ const Index = () => {
   const fetchData = async () => {
     const userEventResult = await getUserEventInfoApi();
     const pieChartTopReferralData = await getTopReferralForPieChartApi();
+    const topReferralTableData = await getTopReferralForTableApi();
 
-    if (userEventResult && pieChartTopReferralData) {
+    if (userEventResult && pieChartTopReferralData && topReferralTableData) {
       dispatch(setUserEventInfo(userEventResult));
       dispatch(setTopReferralDataForPieChart(pieChartTopReferralData));
+      dispatch(setTopReferralTableData(topReferralTableData));
     } else {
       // api error occur
       dispatch(setSnackBarMsg("API 요청으로 부터 문제가 발생 했습니다."));

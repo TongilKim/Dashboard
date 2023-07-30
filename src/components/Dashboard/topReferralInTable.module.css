@@ -2,14 +2,13 @@
   background-color: white;
   height: 100%;
   padding-left: 30px;
+  overflow-y: auto;
 }
 
 .title {
   color: #3291e8;
   font-weight: 700;
   text-align: left;
-  position: absolute;
-  transform: translate(2px, 10px);
 }
 
 .tableContainer {
@@ -27,25 +26,6 @@ table {
   box-sizing: border-box;
 }
 
-th {
-  color: #6b7176;
-  font-weight: 500;
-  padding: 11px 10px;
-  border: 1px solid #e7e8ea;
-  border-left: none;
-}
-
-td {
-  color: #6b7176;
-  font-weight: 500;
-  padding: 3px 10px;
-  border: 1px solid #e7e8ea;
-  border-left: none;
-  cursor: pointer;
-}
-
-td > span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+table thead:nth-child(2) {
+  font-size: 12px;
 }

@@ -102,6 +102,32 @@ const getTopFiveData = (data: string[][]) => {
   return resultArray;
 };
 
+const reFormatTableData = (data: string[][]) => {
+  // Step 1: Group the data by country and region
+  const groupedData: any = {};
+  data.forEach(([country, region, city, value]) => {
+    if (!groupedData[country]) {
+      groupedData[country] = {};
+    }
+    if (!groupedData[country][region]) {
+      groupedData[country][region] = [];
+    }
+    groupedData[country][region].push({ city, value });
+  });
+
+  // Step 2: Reformat the data for expandable table
+  const formattedData: any = [];
+  Object.keys(groupedData).forEach((country) => {
+    const countryData = { country, regions: [] };
+    Object.keys(groupedData[country]).forEach((region) => {
+      const regionData = { region, cities: groupedData[country][region] };
+      countryData.regions.push(regionData);
+    });
+    formattedData.push(countryData);
+  });
+  return formattedData;
+};
+
 type InitialState = {
   totalEventCount: number;
   uniqueEventCount: number;
@@ -114,6 +140,7 @@ type InitialState = {
     name: string;
     value: number;
   }>;
+  referralTableData: Array<any>;
 };
 
 const initialState: InitialState = {
@@ -121,6 +148,7 @@ const initialState: InitialState = {
   uniqueEventCount: 0,
   dauChartData: [],
   topFiveReferralData: [],
+  referralTableData: [],
 };
 
 const userEventInfoSlice = createSlice({
@@ -139,10 +167,18 @@ const userEventInfoSlice = createSlice({
       const { data } = result;
       state.topFiveReferralData = getTopFiveData(data.rows);
     },
+    setTopReferralTableData(state, action: PayloadAction<any>) {
+      const result = action.payload;
+      const { data } = result;
+      state.referralTableData = reFormatTableData(data.rows);
+    },
   },
 });
 
-export const { setUserEventInfo, setTopReferralDataForPieChart } =
-  userEventInfoSlice.actions;
+export const {
+  setUserEventInfo,
+  setTopReferralDataForPieChart,
+  setTopReferralTableData,
+} = userEventInfoSlice.actions;
 
 export default userEventInfoSlice.reducer;

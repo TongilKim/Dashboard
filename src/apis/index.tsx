@@ -55,3 +55,22 @@ export const getTopReferralForPieChartApi = async () => {
   }
   return data;
 };
+
+export const getTopReferralForTableApi = async () => {
+  let data: EventCountData | null = null;
+
+  try {
+    // baseURL is configured in webpack
+    await fetch(`https://static.adbrix.io/front/coding-test/event_4.json`, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        data = res;
+      });
+  } catch (error) {
+    // should be implemented with some error cases or something
+    data = null;
+  }
+  return data;
+};

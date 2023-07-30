@@ -1,0 +1,22 @@
+td {
+  color: #6b7176;
+  font-weight: 500;
+  padding: 5px 10px;
+  border: 1px solid #e7e8ea;
+  border-left: none;
+  cursor: pointer;
+}
+
+td > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.regionRow > td > span {
+  padding-left: 55px;
+}
+
+.cityRow > td > span {
+  padding-left: 105px;
+}
