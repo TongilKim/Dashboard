@@ -81,11 +81,6 @@ const defaultLayout = [
 const storedLayout = sessionStorage.getItem("layoutInfo");
 const layout = storedLayout ? JSON.parse(storedLayout) : defaultLayout;
 
-const CustomResizeHandle = () => {
-  // Your custom resizing handle component
-  return <div className="custom-resize-handle">▼</div>; // Customize the appearance as needed
-};
-
 const Index = () => {
   // STORE STATE
   const dispatch = useAppDispatch();
@@ -141,7 +136,6 @@ const Index = () => {
     <ResponsiveGridLayout
       className={`layout`}
       layouts={{ lg: layout }} // TODO: md, sm, xs, xxs
-      resizeHandle={<CustomResizeHandle />}
       breakpoints={{ lg: 1280, md: 992, sm: 767, xs: 480, xxs: 0 }}
       cols={{ lg: 10, md: 10, sm: 6, xs: 4, xxs: 2 }}
       onLayoutChange={onLayoutChange}
