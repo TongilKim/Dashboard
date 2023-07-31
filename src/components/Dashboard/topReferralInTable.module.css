@@ -1,0 +1,31 @@
+.wrapper {
+  background-color: white;
+  height: 100%;
+  padding-left: 30px;
+  overflow-y: auto;
+}
+
+.title {
+  color: #3291e8;
+  font-weight: 700;
+  text-align: left;
+}
+
+.tableContainer {
+  padding-top: 50px;
+}
+
+table {
+  text-align: left;
+  table-layout: fixed;
+  min-width: 100%;
+  border: 1px solid #e7e8ea;
+  border-left: none;
+  border-collapse: collapse;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+table thead:nth-child(2) {
+  font-size: 12px;
+}
