@@ -11,3 +11,65 @@
   position: absolute;
   transform: translate(2px, 10px);
 }
+
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding-bottom: 20px;
+}
+
+.sliderContainer > button {
+  padding: 8px;
+  border: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  outline: none;
+  font-size: 18px;
+}
+
+.sliderButtonContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.sliderButtonContainer > svg {
+  cursor: pointer;
+}
+
+.leftButton {
+  border-radius: 5px 0 0 5px;
+}
+
+.rightButton {
+  border-radius: 0 5px 5px 0;
+}
+
+.legendList {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+
+.legendList > li {
+  padding: 5px 7px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 5px;
+}
+
+.rectangle {
+  width: 20px;
+  height: 10px;
+  border-radius: 2px;
+}

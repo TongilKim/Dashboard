@@ -1,7 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { formatNumber } from "../../utils/Format";
-import { useAppSelector } from "../../stores/hooks";
-import style from "./DauChart.module.css";
 import {
   ComposedChart,
   Line,
@@ -13,7 +10,13 @@ import {
   Legend,
   ResponsiveContainer,
   Brush,
+  AreaChart,
+  Area,
 } from "recharts";
+
+import { formatNumber } from "../../utils/Format";
+import { useAppSelector } from "../../stores/hooks";
+import style from "./DauChart.module.css";
 
 const renderCustomLegend = (value: string, entry: any) => {
   const { color } = entry;
@@ -61,7 +64,16 @@ const DauChart = () => {
           />
           <YAxis yAxisId="uniqView" dataKey="uniqView" orientation="right" />
           <Bar dataKey="pageView" fill="#21c3aa" />
-          <Brush dataKey="pageView" y={10} stroke="#0288d1" />
+          <Brush dataKey="uniqView" y={10} stroke="#dde1e4" fillOpacity={0.6}>
+            <AreaChart data={dauChartData}>
+              <Area
+                type="monotone"
+                dataKey="uniqView"
+                stroke="#dde1e4"
+                fill="#dfe6f3"
+              />
+            </AreaChart>
+          </Brush>
         </ComposedChart>
       </ResponsiveContainer>
     </div>

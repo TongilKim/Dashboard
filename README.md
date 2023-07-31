@@ -1,27 +1,75 @@
-# React + TypeScript + Vite
+## 실행 방법
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### `yarn install`
 
-Currently, two official plugins are available:
+필요한 패키지를 설치합니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### `yarn dev`
 
-## Expanding the ESLint configuration
+개발 모드에서 앱을 실행합니다.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<br/>
 
-- Configure the top-level `parserOptions` property like this:
+## 파일구조
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+📦src <br/>
+┣ 📂Pages <br/>
+┃ ┣ 📂Dashboard <br/>
+┃ ┃ ┗ 📜index.tsx // 대시보드 페이지 <br/>
+┃ ┗ 📜index.tsx <br/>
+┣ 📂Utils <br/>
+┃ ┗ 📜Format.ts // 유틸 함수 <br/>
+┣ 📂apis <br/>
+┃ ┗ 📜index.ts // API 요청 함수 <br/>
+┣ 📂common <br/>
+┃ ┣ 📂Snackbar <br/>
+┃ ┃ ┗ 📜index.tsx // API request 실패 시 노출되는 스낵바 <br/>
+┃ ┗ 📂Table // Top referral 정보를 보여주는 Table <br/>
+┃ ┃ ┣ 📜TableBody.tsx <br/>
+┃ ┃ ┣ 📜TableHeader.tsx <br/>
+┃ ┃ ┗ 📜TableRow.tsx <br/>
+┣ 📂components <br/>
+┃ ┗ 📂Dashboard <br/>
+┃ ┃ ┣ 📜DauChart.tsx // DAU 차트 컴포넌트 <br/>
+┃ ┃ ┣ 📜SummaryCard.tsx // user event를 보여주는 카드 컴포넌트 <br/>
+┃ ┃ ┣ 📜TopReferralInPieChart.tsx // Top referral 데이터를 보여주는 pie chart 컴포넌트 <br/>
+┃ ┃ ┣ 📜TopReferralInTable.tsx // Top referral 데이터를 보여주는 테이블 컴포넌트 <br/>
+┣ 📂constants <br/>
+┃ ┗ 📜layoutConfig.ts // responsive layout 값들을 정의하는 constant <br/>
+┣ 📂stores // global state를 관리하는 store <br/>
+┃ ┣ 📂slice <br/>
+┃ ┃ ┣ 📜SnackbarSlice.tsx // snackbar state 관리를 위한 slice <br/>
+┃ ┃ ┗ 📜UserEventInfoSlice.tsx // 대시보드에 관련된 모든 state 관리를 위한 slice <br/>
+┃ ┣ 📜hooks.tsx // Store의 custom hook <br/>
+┃ ┗ 📜index.tsx <br/>
+┣ 📜App.css <br/>
+┣ 📜App.tsx <br/>
+┣ 📜index.css <br/>
+┣ 📜main.tsx <br/>
+┗ 📜vite-env.d.ts <br/>
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+---
+
+<br/>
+
+## 기술 스택
+
+### redux-toolkit
+
+- client state 관리를 위해 적용.
+
+### react-grid-layout
+
+- 그래프들을 draggable, resizable 하게 하기 위해 사용
+
+### recharts
+
+- 요구되는 차트를 그리기 위해 사용
+
+### react-icons
+
+- 아이콘 사용
+
+---
+
+<br/>

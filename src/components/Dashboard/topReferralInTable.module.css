@@ -26,6 +26,10 @@ table {
   box-sizing: border-box;
 }
 
+table thead {
+  background-color: #f5f7fb;
+}
+
 table thead:nth-child(2) {
   font-size: 12px;
 }

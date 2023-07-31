@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from "react";
+import { Responsive, WidthProvider } from "react-grid-layout";
+
 import DauChart from "../../components/Dashboard/DauChart";
 import SummaryCard from "../../components/Dashboard/SummaryCard";
-import { Responsive, WidthProvider } from "react-grid-layout";
 import TopReferralInPieChart from "../../components/Dashboard/TopReferralInPieChart";
-import style from "./index.module.css";
 import {
   getTopReferralForPieChartApi,
   getTopReferralForTableApi,
@@ -17,8 +17,8 @@ import {
   setUserEventInfo,
   setTopReferralTableData,
 } from "../../stores/slice/UserEventInfoSlice";
-import { setSnackBarMsg } from "../../stores/slice/SnackbarSlice";
 import TopReferralInTable from "../../components/Dashboard/TopReferralInTable";
+import { setSnackBarMsg } from "../../stores/slice/SnackbarSlice";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -94,18 +94,39 @@ const Index = () => {
   };
 
   const fetchData = async () => {
-    const userEventResult = await getUserEventInfoApi();
-    const pieChartTopReferralData = await getTopReferralForPieChartApi();
-    const topReferralTableData = await getTopReferralForTableApi();
-
-    if (userEventResult && pieChartTopReferralData && topReferralTableData) {
-      dispatch(setUserEventInfo(userEventResult));
-      dispatch(setTopReferralDataForPieChart(pieChartTopReferralData));
-      dispatch(setTopReferralTableData(topReferralTableData));
-    } else {
-      // api error occur
-      dispatch(setSnackBarMsg("API 요청으로 부터 문제가 발생 했습니다."));
-    }
+    await getUserEventInfoApi().then((res) => {
+      if (res) {
+        dispatch(setUserEventInfo(res));
+      } else {
+        dispatch(
+          setSnackBarMsg(
+            "API 요청으로 부터 문제가 발생 했습니다. (getUserEventInfoApi)"
+          )
+        );
+      }
+    });
+    await getTopReferralForPieChartApi().then((res) => {
+      if (res) {
+        dispatch(setTopReferralDataForPieChart(res));
+      } else {
+        dispatch(
+          setSnackBarMsg(
+            "API 요청으로 부터 문제가 발생 했습니다. (getTopReferralForPieChartApi)"
+          )
+        );
+      }
+    });
+    await getTopReferralForTableApi().then((res) => {
+      if (res) {
+        dispatch(setTopReferralTableData(res));
+      } else {
+        dispatch(
+          setSnackBarMsg(
+            "API 요청으로 부터 문제가 발생 했습니다. (getTopReferralForTableApi)"
+          )
+        );
+      }
+    });
   };
 
   useEffect(() => {
@@ -116,11 +137,6 @@ const Index = () => {
     <ResponsiveGridLayout
       className={`layout`}
       layouts={{ lg: layout }} // TODO: md, sm, xs, xxs
-      // resizeHandle={
-      //   <span className="react-resizable-handle" style={{}}>
-      //     hi
-      //   </span>
-      // }
       breakpoints={{ lg: 1280, md: 992, sm: 767, xs: 480, xxs: 0 }}
       cols={{ lg: 10, md: 10, sm: 6, xs: 4, xxs: 2 }}
       onLayoutChange={onLayoutChange}

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Fragment, useEffect, useState } from "react";
-import style from "./TableRow.module.css";
 import { PiCaretCircleRight } from "react-icons/pi";
 import { MdExpandCircleDown } from "react-icons/md";
+
+import style from "./TableRow.module.css";
 import { useAppSelector } from "../../stores/hooks";
 
 const CityRow = (props: {
@@ -90,6 +91,7 @@ const TableRow = (props: { rowInfo: any }) => {
   useEffect(() => {
     setIsClickedCountry(false);
   }, [referralTableData]);
+
   return (
     <Fragment>
       <tr>
