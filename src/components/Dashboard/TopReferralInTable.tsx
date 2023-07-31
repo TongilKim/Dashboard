@@ -12,7 +12,6 @@ import {
 
 const TopReferralInTable = () => {
   const dispatch = useAppDispatch();
-  const { referralTableData } = useAppSelector((state) => state.userEventInfo);
   const [sortGroups, setSortGroups] = useState(false);
   const [sortMetrics, setSortMetrics] = useState(false);
 
