@@ -41,12 +41,12 @@
 ┃ ┃ ┣ 📜SnackbarSlice.tsx // snackbar state 관리를 위한 slice <br/>
 ┃ ┃ ┗ 📜UserEventInfoSlice.tsx // 대시보드에 관련된 모든 state 관리를 위한 slice <br/>
 ┃ ┣ 📜hooks.tsx // Store의 custom hook <br/>
-┃ ┗ 📜index.tsx
-┣ 📜App.css
-┣ 📜App.tsx
-┣ 📜index.css
-┣ 📜main.tsx
-┗ 📜vite-env.d.ts
+┃ ┗ 📜index.tsx <br/>
+┣ 📜App.css <br/>
+┣ 📜App.tsx <br/>
+┣ 📜index.css <br/>
+┣ 📜main.tsx <br/>
+┗ 📜vite-env.d.ts <br/>
 
 ---
 
