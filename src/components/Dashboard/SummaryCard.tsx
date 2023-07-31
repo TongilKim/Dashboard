@@ -1,5 +1,6 @@
-import style from "./SummaryCard.module.css";
 import { TbArrowBigDownFilled, TbArrowBigUpFilled } from "react-icons/tb";
+
+import style from "./SummaryCard.module.css";
 
 type Props = {
   // key: number;

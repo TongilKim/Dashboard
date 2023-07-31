@@ -1,7 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { formatNumber } from "../../utils/Format";
-import { useAppSelector } from "../../stores/hooks";
-import style from "./DauChart.module.css";
 import {
   ComposedChart,
   Line,
@@ -13,10 +10,13 @@ import {
   Legend,
   ResponsiveContainer,
   Brush,
-  LineChart,
   AreaChart,
   Area,
 } from "recharts";
+
+import { formatNumber } from "../../utils/Format";
+import { useAppSelector } from "../../stores/hooks";
+import style from "./DauChart.module.css";
 
 const renderCustomLegend = (value: string, entry: any) => {
   const { color } = entry;

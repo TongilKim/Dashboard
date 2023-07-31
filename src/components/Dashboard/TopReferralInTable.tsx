@@ -1,10 +1,11 @@
+import { useState } from "react";
+import { LiaSortAmountUpSolid, LiaSortAmountDownSolid } from "react-icons/lia";
+import { HiArrowNarrowDown, HiArrowNarrowUp } from "react-icons/hi";
+
 import style from "./topReferralInTable.module.css";
 import TableHeader from "../../common/Table/TableHeader";
 import TableBody from "../../common/Table/TableBody";
-import { useAppDispatch, useAppSelector } from "../../stores/hooks";
-import { LiaSortAmountUpSolid, LiaSortAmountDownSolid } from "react-icons/lia";
-import { HiArrowNarrowDown, HiArrowNarrowUp } from "react-icons/hi";
-import { useState } from "react";
+import { useAppDispatch } from "../../stores/hooks";
 import {
   sortReferralTableDataByGroups,
   sortReferralTableDataByMetrics,

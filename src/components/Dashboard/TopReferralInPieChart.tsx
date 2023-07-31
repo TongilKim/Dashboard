@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useState } from "react";
-import { useAppSelector } from "../../stores/hooks";
-import style from "./TopReferrallInPieChart.module.css";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+
+import { useAppSelector } from "../../stores/hooks";
+import style from "./TopReferrallInPieChart.module.css";
 
 const COLORS = ["#4ea397", "#21c3aa", "#7bd9a5", "#f58db2", "#d0648a"];
 const RADIAN = Math.PI / 180;
 
-const CustomLegend = (props) => {
+const CustomLegend = (props: { payload?: any }) => {
   const { payload } = props;
   const sliderRef: any = useRef(null);
   const [scrollIndex, setScrollIndex] = useState(0);
@@ -33,15 +34,17 @@ const CustomLegend = (props) => {
   return (
     <div className={style.sliderContainer}>
       <ul className={style.legendList} ref={sliderRef}>
-        {payload.map((legendInfo, index) => (
-          <li key={index}>
-            <div
-              className={style.rectangle}
-              style={{ backgroundColor: `${legendInfo.color}` }}
-            ></div>
-            {legendInfo.value}
-          </li>
-        ))}
+        {payload.map(
+          (legendInfo: { color: string; value: string }, index: number) => (
+            <li key={index}>
+              <div
+                className={style.rectangle}
+                style={{ backgroundColor: `${legendInfo.color}` }}
+              ></div>
+              {legendInfo.value}
+            </li>
+          )
+        )}
       </ul>
       <div className={style.sliderButtonContainer}>
         <AiFillCaretLeft
