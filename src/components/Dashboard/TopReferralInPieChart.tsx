@@ -1,10 +1,67 @@
-import { useCallback, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useRef, useState } from "react";
 import { useAppSelector } from "../../stores/hooks";
 import style from "./TopReferrallInPieChart.module.css";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
+import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 
 const COLORS = ["#4ea397", "#21c3aa", "#7bd9a5", "#f58db2", "#d0648a"];
 const RADIAN = Math.PI / 180;
+
+const CustomLegend = (props) => {
+  const { payload } = props;
+  const sliderRef: any = useRef(null);
+  const [scrollIndex, setScrollIndex] = useState(0);
+
+  const onClickRightButton = () => {
+    const itemWidth = sliderRef.current.children[0].offsetWidth + 5;
+    const maxScrollIndex = Math.ceil(payload.length / 4) - 1;
+    if (scrollIndex < maxScrollIndex) {
+      sliderRef.current.scrollLeft += itemWidth;
+      setScrollIndex((prevScrollIndex) => prevScrollIndex + 1);
+    }
+  };
+
+  const onClickLeftButton = () => {
+    const itemWidth = sliderRef.current.children[0].offsetWidth + 5;
+    if (scrollIndex > 0) {
+      sliderRef.current.scrollLeft -= itemWidth;
+      setScrollIndex((prevScrollIndex) => prevScrollIndex - 1);
+    }
+  };
+
+  return (
+    <div className={style.sliderContainer}>
+      <ul className={style.legendList} ref={sliderRef}>
+        {payload.map((legendInfo, index) => (
+          <li key={index}>
+            <div
+              className={style.rectangle}
+              style={{ backgroundColor: `${legendInfo.color}` }}
+            ></div>
+            {legendInfo.value}
+          </li>
+        ))}
+      </ul>
+      <div className={style.sliderButtonContainer}>
+        <AiFillCaretLeft
+          className={style.leftButton}
+          onClick={onClickLeftButton}
+          color={scrollIndex === 0 && "grey"}
+          disabled={scrollIndex === 0}
+        />
+
+        <span>{`${scrollIndex + 1}/${Math.ceil(payload.length / 4)}`}</span>
+        <AiFillCaretRight
+          className={style.rightButton}
+          onClick={onClickRightButton}
+          color={scrollIndex >= Math.ceil(payload.length / 4) - 1 && "grey"}
+          disabled={scrollIndex >= Math.ceil(payload.length / 4) - 1}
+        />
+      </div>
+    </div>
+  );
+};
 
 const renderCustomizedLabel = (props: any) => {
   const { cx, cy, midAngle, outerRadius, fill, name } = props;
@@ -67,7 +124,7 @@ const TopReferralInPieChart = () => {
               />
             ))}
           </Pie>
-          <Legend />
+          <Legend content={<CustomLegend />} />
         </PieChart>
       </ResponsiveContainer>
     </div>
