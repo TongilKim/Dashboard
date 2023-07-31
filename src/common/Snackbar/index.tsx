@@ -4,6 +4,7 @@
  * PURPOSE:  API 에러 발생 시, 아래 하단에서 에러메시지와 함께 보여지는 snackbar
  */
 import React, { Fragment, useEffect } from "react";
+
 import { useAppDispatch, useAppSelector } from "../../stores/hooks";
 import { setSnackBarMsg } from "../../stores/slice/SnackbarSlice";
 import style from "./Snackbar.module.css";

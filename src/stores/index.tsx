@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import snackBarReducer from "./slice/SnackbarSlice";
 import userEventInfoReducer from "./slice/UserEventInfoSlice";
 
