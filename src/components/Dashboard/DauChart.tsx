@@ -13,6 +13,9 @@ import {
   Legend,
   ResponsiveContainer,
   Brush,
+  LineChart,
+  AreaChart,
+  Area,
 } from "recharts";
 
 const renderCustomLegend = (value: string, entry: any) => {
@@ -61,7 +64,17 @@ const DauChart = () => {
           />
           <YAxis yAxisId="uniqView" dataKey="uniqView" orientation="right" />
           <Bar dataKey="pageView" fill="#21c3aa" />
-          <Brush dataKey="pageView" y={10} stroke="#0288d1" />
+          <Brush dataKey="pageView" y={10} stroke="#dde1e4" fillOpacity={0.6}>
+            <AreaChart data={dauChartData}>
+              <Area
+                y={2}
+                type="monotone"
+                dataKey="uniqView"
+                stroke="#dde1e4"
+                fill="#dfe6f3"
+              />
+            </AreaChart>
+          </Brush>
         </ComposedChart>
       </ResponsiveContainer>
     </div>

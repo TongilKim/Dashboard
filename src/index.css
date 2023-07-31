@@ -11,3 +11,9 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.recharts-brush-slide {
+  fill: #ced8e9;
+  height: 50px;
+  fill-opacity: 0.5;
+}
