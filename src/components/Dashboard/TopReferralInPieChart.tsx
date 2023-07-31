@@ -47,7 +47,7 @@ const CustomLegend = (props) => {
         <AiFillCaretLeft
           className={style.leftButton}
           onClick={onClickLeftButton}
-          color={scrollIndex === 0 && "grey"}
+          color={scrollIndex === 0 ? "grey" : ""}
           disabled={scrollIndex === 0}
         />
 
@@ -55,7 +55,7 @@ const CustomLegend = (props) => {
         <AiFillCaretRight
           className={style.rightButton}
           onClick={onClickRightButton}
-          color={scrollIndex >= Math.ceil(payload.length / 4) - 1 && "grey"}
+          color={scrollIndex >= Math.ceil(payload.length / 4) - 1 ? "grey" : ""}
           disabled={scrollIndex >= Math.ceil(payload.length / 4) - 1}
         />
       </div>
